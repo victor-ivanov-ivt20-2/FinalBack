@@ -8,7 +8,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://ace:password@ace-development.ru:5432/db?schema=public"
+  url      = env("DATABASE_URL")
 }
 
 model User {

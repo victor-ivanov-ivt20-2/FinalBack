@@ -1,5 +1,11 @@
 FROM node:18 as build
 WORKDIR /opt/app
+ARG NODE_ENV=production
+ENV NODE_ENV=$NODE_ENV
+
+ARG DATABASE_URL
+ENV DATABASE_URL=$DATABASE_URL
+
 ADD package*.json ./
 RUN npm ci
 ADD . .
