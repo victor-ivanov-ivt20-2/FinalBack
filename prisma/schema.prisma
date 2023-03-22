@@ -20,7 +20,7 @@ model User {
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @default(now())
   deletedAt          DateTime?
-  role               Role
+  role               Role?
 }
 
 enum Role {
