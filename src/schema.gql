@@ -16,9 +16,21 @@ input CreatePlaceInput {
   name: String!
 }
 
+input DeletePlaceInput {
+  id: Int!
+}
+
+input FindMany {
+  """Сколько скипнем"""
+  skip: Int!
+
+  """Сколько возьмём"""
+  take: Int!
+}
+
 type Mutation {
   createPlace(createPlaceInput: CreatePlaceInput!): Place!
-  removePlace(id: Int!): Place!
+  removePlace(id: DeletePlaceInput!): Place!
   updatePlace(updatePlaceInput: UpdatePlaceInput!): Place!
 }
 
@@ -34,6 +46,7 @@ type Place {
 }
 
 type Query {
+  findAll(findmany: FindMany!): [Place!]!
   place(id: Int!): Place!
 }
 

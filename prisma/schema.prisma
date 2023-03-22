@@ -31,7 +31,7 @@ model Place {
   name        String
   description String
   addressId   Int
-  address     Address @relation(fields: [addressId], references: [id])
+  address     Address @relation(fields: [addressId], references: [id], onDelete: Cascade)
 }
 
 model Image {

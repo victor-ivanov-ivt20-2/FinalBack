@@ -2,6 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateAddressInput } from './dto/create-address.input';
 import { CreatePlaceInput } from './dto/create-place.input';
+import { DeletePlaceInput } from './dto/delete-place.input';
+import { FindById } from './dto/find-by-id.input';
+import { FindMany } from './dto/findmany';
 import { UpdatePlaceInput } from './dto/update-place.input';
 
 @Injectable()
@@ -23,19 +26,38 @@ export class PlaceService {
     });
   }
 
-  findAll() {
-    return `This action returns all place`;
+  async findAll(findmany: FindMany) {
+    return this.prisma.place.findMany({
+      skip: findmany.skip,
+      take: findmany.take,
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} place`;
+    return this.prisma.place.findUnique({
+      where: {
+        id: id,
+      },
+    });
   }
 
-  update(id: number, updatePlaceInput: UpdatePlaceInput) {
-    return `This action updates a #${id} place`;
+  async update(id: number, updatePlaceInput: UpdatePlaceInput) {
+    return this.prisma.place.update({
+      where: {
+        id: updatePlaceInput.id,
+      },
+      data: {
+        name: updatePlaceInput.name,
+        description: updatePlaceInput.description,
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} place`;
+  async remove(deletePlaceInput: DeletePlaceInput) {
+    return this.prisma.place.delete({
+      where: {
+        id: deletePlaceInput.id,
+      },
+    });
   }
 }

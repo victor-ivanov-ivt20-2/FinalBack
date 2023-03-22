@@ -4,6 +4,8 @@ import { Place } from './entities/place.entity';
 import { CreatePlaceInput } from './dto/create-place.input';
 import { UpdatePlaceInput } from './dto/update-place.input';
 import { CreateAddressInput } from './dto/create-address.input';
+import { FindMany } from './dto/findmany';
+import { DeletePlaceInput } from './dto/delete-place.input';
 
 @Resolver(() => Place)
 export class PlaceResolver {
@@ -14,9 +16,9 @@ export class PlaceResolver {
     return this.placeService.create(createPlaceInput);
   }
 
-  @Query(() => [Place], { name: 'place' })
-  findAll() {
-    return this.placeService.findAll();
+  @Query(() => [Place])
+  findAll(@Args('findmany') findmany: FindMany) {
+    return this.placeService.findAll(findmany);
   }
 
   @Query(() => Place, { name: 'place' })
@@ -30,7 +32,7 @@ export class PlaceResolver {
   }
 
   @Mutation(() => Place)
-  removePlace(@Args('id', { type: () => Int }) id: number) {
-    return this.placeService.remove(id);
+  removePlace(@Args('id') deletePlaceInput: DeletePlaceInput) {
+    return this.placeService.remove(deletePlaceInput);
   }
 }
