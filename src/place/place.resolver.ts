@@ -3,9 +3,9 @@ import { PlaceService } from './place.service';
 import { Place } from './entities/place.entity';
 import { CreatePlaceInput } from './dto/create-place.input';
 import { UpdatePlaceInput } from './dto/update-place.input';
-import { CreateAddressInput } from './dto/create-address.input';
 import { FindMany } from './dto/findmany';
 import { DeletePlaceInput } from './dto/delete-place.input';
+import { Public } from 'src/auth/decorators/public.decorator';
 
 @Resolver(() => Place)
 export class PlaceResolver {
@@ -16,11 +16,12 @@ export class PlaceResolver {
     return this.placeService.create(createPlaceInput);
   }
 
+  @Public()
   @Query(() => [Place])
   findAll(@Args('findmany') findmany: FindMany) {
     return this.placeService.findAll(findmany);
   }
-
+  @Public()
   @Query(() => Place, { name: 'place' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.placeService.findOne(id);

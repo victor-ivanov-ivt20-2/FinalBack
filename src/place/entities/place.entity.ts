@@ -8,4 +8,8 @@ export class Place {
   description: string;
   @Field(() => Int, { description: 'id адреса' })
   addressId: number;
+  @Field(() => String, { nullable: true, description: 'долгота' })
+  longitude: string;
+  @Field(() => String, { nullable: true, description: 'широта' })
+  latitude: string;
 }

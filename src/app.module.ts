@@ -6,6 +6,9 @@ import { PlaceModule } from './place/place.module';
 import { PrismaService } from './prisma/prisma.service';
 import { ApolloDriver } from '@nestjs/apollo';
 import { join } from 'path';
+import { AccessTokenGuard } from './auth/guards/accessToken.guard';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,8 +22,16 @@ import { join } from 'path';
       },
     }),
     PlaceModule,
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService, PrismaService],
+  providers: [
+    AppService,
+    PrismaService,
+    {
+      provide: APP_GUARD,
+      useClass: AccessTokenGuard,
+    },
+  ],
 })
 export class AppModule {}

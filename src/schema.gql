@@ -28,10 +28,23 @@ input FindMany {
   take: Int!
 }
 
+type LogoutResponse {
+  loggedOut: Boolean!
+}
+
 type Mutation {
   createPlace(createPlaceInput: CreatePlaceInput!): Place!
+  getNewTokens: NewTokensResponse!
+  logout(id: String!): LogoutResponse!
   removePlace(id: DeletePlaceInput!): Place!
+  signin(signInInput: SignInInput!): SignResponse!
+  signup(signUpInput: SignUpInput!): SignResponse!
   updatePlace(updatePlaceInput: UpdatePlaceInput!): Place!
+}
+
+type NewTokensResponse {
+  accessToken: String!
+  refreshToken: String!
 }
 
 type Place {
@@ -41,13 +54,37 @@ type Place {
   """Описание места"""
   description: String!
 
+  """широта"""
+  latitude: String
+
+  """долгота"""
+  longitude: String
+
   """Название места"""
   name: String!
 }
 
 type Query {
   findAll(findmany: FindMany!): [Place!]!
+  hello: String!
   place(id: Int!): Place!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+type SignResponse {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
+}
+
+input SignUpInput {
+  email: String!
+  password: String!
+  username: String!
 }
 
 input UpdatePlaceInput {
@@ -63,4 +100,10 @@ input UpdatePlaceInput {
 
   """Название места"""
   name: String
+}
+
+type User {
+  email: String!
+  id: String!
+  username: String!
 }

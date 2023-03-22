@@ -12,13 +12,15 @@ datasource db {
 }
 
 model User {
-  id          String  @id @default(cuid())
-  email       String  @unique
-  password    String
-  accessToken String?
-  refrehToken String?
-  avatar      String
-  role        Role    @default(User)
+  id                 String    @id @default(cuid())
+  username           String
+  email              String    @unique
+  hashedPassword     String
+  hashedRefreshToken String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @default(now())
+  deletedAt          DateTime?
+  role               Role
 }
 
 enum Role {
@@ -31,7 +33,10 @@ model Place {
   name        String
   description String
   addressId   Int
-  address     Address @relation(fields: [addressId], references: [id], onDelete: Cascade)
+  longitude   String?
+  latitude    String?
+  // address     Address @relation(fields: [addressId, longitude, latitude], references: [id, longitude, latitude], onDelete: Cascade)
+  // Address     Address @relation(fields: [addressId], references: [id])
 }
 
 model Image {
@@ -43,12 +48,12 @@ model Image {
   placeId  Int
 }
 
-model Address {
-  id        Int     @id @default(autoincrement())
-  region    String?
-  city      String?
-  street    String?
-  longitude String
-  latitude  String
-  Place     Place[]
-}
+// model Address {
+//   id        Int     @id @default(autoincrement())
+//   region    String?
+//   city      String?
+//   street    String?
+//   longitude String  @unique
+//   latitude  String  @unique
+//   Place     Place[]
+// }
