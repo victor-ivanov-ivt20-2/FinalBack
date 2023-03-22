@@ -8,7 +8,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://ace:password@ace-development.ru:5432/db?schema=public"
 }
 
 model User {
@@ -21,6 +21,8 @@ model User {
   updatedAt          DateTime  @default(now())
   deletedAt          DateTime?
   role               Role?
+  Review             Review[]
+  Order              Order[]
 }
 
 enum Role {
@@ -29,14 +31,43 @@ enum Role {
 }
 
 model Place {
-  id          Int     @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   name        String
   description String
-  addressId   Int
+  price       Int?
+  region      String?
+  city        String
+  street      String
+  house       String?
+  rating      Int?
   longitude   String?
   latitude    String?
-  // address     Address @relation(fields: [addressId, longitude, latitude], references: [id, longitude, latitude], onDelete: Cascade)
-  // Address     Address @relation(fields: [addressId], references: [id])
+  categories  Category[]
+}
+
+model Category {
+  id     Int     @id @default(autoincrement())
+  name   String
+  places Place[]
+}
+
+model Order {
+  id      String   @id @default(cuid())
+  userId  String
+  money   Decimal  @db.Decimal(9, 2)
+  startAt DateTime
+  user    User     @relation(fields: [userId], references: [id])
+}
+
+model Review {
+  id        Int       @id @default(autoincrement())
+  userId    String
+  content   String
+  rating    Int
+  createdAt DateTime
+  updatedAt DateTime
+  deletedAt DateTime?
+  user      User      @relation(fields: [userId], references: [id])
 }
 
 model Image {
@@ -47,13 +78,3 @@ model Image {
   size     String
   placeId  Int
 }
-
-// model Address {
-//   id        Int     @id @default(autoincrement())
-//   region    String?
-//   city      String?
-//   street    String?
-//   longitude String  @unique
-//   latitude  String  @unique
-//   Place     Place[]
-// }

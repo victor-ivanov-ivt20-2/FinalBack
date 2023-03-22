@@ -3,17 +3,23 @@
 # ------------------------------------------------------
 
 input CreatePlaceInput {
+  """город"""
+  city: String!
+
   """Описание места"""
   description: String!
 
-  """широта"""
-  latitude: String!
-
-  """долгота"""
-  longitude: String!
+  """дом"""
+  house: String!
 
   """Название места"""
   name: String!
+
+  """регион"""
+  region: String!
+
+  """улица"""
+  street: String!
 }
 
 input DeletePlaceInput {
@@ -88,18 +94,24 @@ input SignUpInput {
 }
 
 input UpdatePlaceInput {
+  """город"""
+  city: String
+
   """Описание места"""
   description: String
+
+  """дом"""
+  house: String
   id: Int!
-
-  """широта"""
-  latitude: String
-
-  """долгота"""
-  longitude: String
 
   """Название места"""
   name: String
+
+  """регион"""
+  region: String
+
+  """улица"""
+  street: String
 }
 
 type User {
