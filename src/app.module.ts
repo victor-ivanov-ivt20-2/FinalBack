@@ -9,6 +9,7 @@ import { join } from 'path';
 import { AccessTokenGuard } from './auth/guards/accessToken.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthModule } from './auth/auth.module';
+import { TelegramModule } from './telegram/telegram.module';
 
 @Module({
   imports: [
@@ -17,12 +18,13 @@ import { AuthModule } from './auth/auth.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
       cors: {
-        origin: 'http://localhost:3000',
+        origin: ['http://localhost:3000', 'http://ace-development.ru:3000'],
         credentials: true,
       },
     }),
     PlaceModule,
     AuthModule,
+    TelegramModule,
   ],
   controllers: [AppController],
   providers: [

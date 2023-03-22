@@ -10,7 +10,7 @@ import { Public } from 'src/auth/decorators/public.decorator';
 @Resolver(() => Place)
 export class PlaceResolver {
   constructor(private readonly placeService: PlaceService) {}
-
+  @Public()
   @Mutation(() => Place)
   createPlace(@Args('createPlaceInput') createPlaceInput: CreatePlaceInput) {
     return this.placeService.create(createPlaceInput);
