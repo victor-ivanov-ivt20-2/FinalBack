@@ -1,0 +1,53 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreatePlaceInput {
+  """Описание места"""
+  description: String!
+
+  """широта"""
+  latitude: String!
+
+  """долгота"""
+  longitude: String!
+
+  """Название места"""
+  name: String!
+}
+
+type Mutation {
+  createPlace(createPlaceInput: CreatePlaceInput!): Place!
+  removePlace(id: Int!): Place!
+  updatePlace(updatePlaceInput: UpdatePlaceInput!): Place!
+}
+
+type Place {
+  """id адреса"""
+  addressId: Int!
+
+  """Описание места"""
+  description: String!
+
+  """Название места"""
+  name: String!
+}
+
+type Query {
+  place(id: Int!): Place!
+}
+
+input UpdatePlaceInput {
+  """Описание места"""
+  description: String
+  id: Int!
+
+  """широта"""
+  latitude: String
+
+  """долгота"""
+  longitude: String
+
+  """Название места"""
+  name: String
+}
