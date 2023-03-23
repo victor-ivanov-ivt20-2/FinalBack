@@ -24,6 +24,7 @@ import { TelegramModule } from './telegram/telegram.module';
     }),
     PlaceModule,
     AuthModule,
+    TelegramModule,
   ],
   controllers: [AppController],
   providers: [

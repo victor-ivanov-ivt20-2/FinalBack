@@ -11,7 +11,7 @@ import { AuthService } from 'src/auth/auth.service';
 import { Telegraf } from 'telegraf';
 import { Context } from './context.interface';
 import { Public } from '../auth/decorators/public.decorator';
-import { actionButton, mainButton } from './telegram.buttons';
+import { actionButton } from './telegram.buttons';
 @Update()
 export class TelegramUpdate {
   constructor(
@@ -21,7 +21,10 @@ export class TelegramUpdate {
   @Public()
   @Start()
   async startCommand(ctx: Context) {
-    await ctx.reply('Ты войдешь?', actionButton());
+    await ctx.reply(
+      'Здравствуйте, это телеграм бот команды ACE проекта ВПуть. \nВы можете войти в свой аккаунт или же войти в тестовый аккаунт:\n почта: 23@gmail.com\n пароль: 123',
+      actionButton(),
+    );
   }
   @Public()
   @Hears('Войти')
@@ -59,7 +62,7 @@ export class TelegramUpdate {
           ctx.session.deleteMessages.forEach(async (el) => {
             await ctx.deleteMessage(el);
           });
-          await ctx.reply('Здравствуйте, ' + user.username, mainButton());
+          await ctx.reply('Здравствуйте, ' + user.username);
           ctx.session.type = undefined;
           ctx.session.email = undefined;
           ctx.session.isAuth = true;
