@@ -26,6 +26,11 @@ export class PlaceResolver {
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.placeService.findOne(id);
   }
+  @Public()
+  @Query(() => [Place])
+  findThree() {
+    return this.placeService.findThree();
+  }
 
   @Mutation(() => Place)
   updatePlace(@Args('updatePlaceInput') updatePlaceInput: UpdatePlaceInput) {

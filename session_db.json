@@ -5,9 +5,12 @@
       "data": {
         "__scenes": {},
         "deleteMessages": [
-          4
+          19,
+          21,
+          20,
+          22
         ],
-        "type": "signin"
+        "isAuth": true
       }
     }
   ]

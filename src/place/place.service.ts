@@ -50,6 +50,7 @@ export class PlaceService {
         city: createPlaceInput.city,
         street: createPlaceInput.street,
         house: createPlaceInput.house,
+        price: createPlaceInput.price,
       },
     });
   }
@@ -60,8 +61,15 @@ export class PlaceService {
       take: findmany.take,
     });
   }
-
-  findOne(id: number) {
+  async findThree() {
+    return this.prisma.place.findMany({
+      take: 3,
+      orderBy: {
+        createdAt: 'asc',
+      },
+    });
+  }
+  async findOne(id: number) {
     return this.prisma.place.findUnique({
       where: {
         id: id,

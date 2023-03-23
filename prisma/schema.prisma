@@ -17,6 +17,7 @@ model User {
   email              String    @unique
   hashedPassword     String
   hashedRefreshToken String?
+  phone              String?
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @default(now())
   deletedAt          DateTime?
@@ -42,6 +43,8 @@ model Place {
   rating      Int?
   longitude   String?
   latitude    String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @default(now())
   categories  Category[]
 }
 

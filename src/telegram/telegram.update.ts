@@ -36,11 +36,17 @@ export class TelegramUpdate {
   async getMessage(@Message('text') message: string, @Ctx() ctx: Context) {
     switch (ctx.session.type) {
       case 'signin':
-        const id = (await ctx.reply('Напишите ваш пароль: ')).message_id;
-        ctx.session.type = 'signin2';
-        ctx.session.email = message;
-        ctx.session.deleteMessages.push(id);
-        ctx.session.deleteMessages.push(ctx.message.message_id);
+        try {
+          const id = (await ctx.reply('Напишите ваш пароль: ')).message_id;
+          ctx.session.type = 'signin2';
+          ctx.session.email = message;
+          ctx.session.deleteMessages.push(id);
+          ctx.session.deleteMessages.push(ctx.message.message_id);
+        } catch (error) {
+          console.log(error);
+          ctx.reply('Ошибка');
+        }
+
         break;
       case 'signin2':
         try {

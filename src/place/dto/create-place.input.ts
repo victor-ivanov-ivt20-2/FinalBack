@@ -1,4 +1,4 @@
-import { InputType, Field } from '@nestjs/graphql';
+import { InputType, Field, Int } from '@nestjs/graphql';
 
 @InputType()
 export class CreatePlaceInput {
@@ -14,4 +14,6 @@ export class CreatePlaceInput {
   street: string;
   @Field(() => String, { description: 'дом' })
   house: string;
+  @Field(() => Int, { description: 'цена' })
+  price: number;
 }

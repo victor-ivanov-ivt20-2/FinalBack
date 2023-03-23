@@ -15,6 +15,9 @@ input CreatePlaceInput {
   """Название места"""
   name: String!
 
+  """цена"""
+  price: Int!
+
   """регион"""
   region: String!
 
@@ -54,11 +57,17 @@ type NewTokensResponse {
 }
 
 type Place {
-  """id адреса"""
-  addressId: Int!
+  """город"""
+  city: String!
 
   """Описание места"""
   description: String!
+
+  """дом"""
+  house: String!
+
+  """id"""
+  id: Int!
 
   """широта"""
   latitude: String
@@ -68,10 +77,17 @@ type Place {
 
   """Название места"""
   name: String!
+
+  """цена"""
+  price: Int
+
+  """улица"""
+  street: String!
 }
 
 type Query {
   findAll(findmany: FindMany!): [Place!]!
+  findThree: [Place!]!
   hello: String!
   place(id: Int!): Place!
 }
@@ -106,6 +122,9 @@ input UpdatePlaceInput {
 
   """Название места"""
   name: String
+
+  """цена"""
+  price: Int
 
   """регион"""
   region: String

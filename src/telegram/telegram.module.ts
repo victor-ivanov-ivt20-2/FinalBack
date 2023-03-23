@@ -12,7 +12,7 @@ const session = new LocalSession({ database: 'session_db.json' });
   imports: [
     TelegrafModule.forRoot({
       middlewares: [session.middleware()],
-      token: '6240245228:AAHX3ONVeSlChx1l6DFa_XNtre3CHAPNeDY',
+      token: '6124602912:AAGHov2pOVKsbA1vQFkllI4uhIKKDVDdN-U',
     }),
   ],
   providers: [TelegramUpdate, AuthService, JwtService, PrismaService],
