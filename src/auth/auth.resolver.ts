@@ -33,8 +33,8 @@ export class AuthResolver {
   }
 
   @Mutation(() => LogoutResponse)
-  logout(@Args('id', { type: () => String }) id: string) {
-    return this.authService.logout(id);
+  logout(@Args('email', { type: () => String }) email: string) {
+    return this.authService.logout(email);
   }
   @Public()
   @UseGuards(RefreshTokenGuard)

@@ -41,7 +41,7 @@ type LogoutResponse {
 type Mutation {
   createPlace(createPlaceInput: CreatePlaceInput!): Place!
   getNewTokens: NewTokensResponse!
-  logout(id: String!): LogoutResponse!
+  logout(email: String!): LogoutResponse!
   removePlace(id: DeletePlaceInput!): Place!
   signin(signInInput: SignInInput!): SignResponse!
   signup(signUpInput: SignUpInput!): SignResponse!

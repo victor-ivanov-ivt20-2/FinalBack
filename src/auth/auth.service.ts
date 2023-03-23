@@ -61,11 +61,11 @@ export class AuthService {
     return `This action removes a #${id} auth`;
   }
 
-  async logout(userId: string) {
+  async logout(email: string) {
     const updatedAt = new Date();
     await this.prisma.user.updateMany({
       where: {
-        id: userId,
+        email: email,
         hashedRefreshToken: { not: null },
       },
       data: {
