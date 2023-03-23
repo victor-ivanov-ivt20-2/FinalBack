@@ -31,7 +31,16 @@ export class PlaceResolver {
   findThree() {
     return this.placeService.findThree();
   }
-
+  @Public()
+  @Query(() => [Place])
+  findByCategory(@Args('category', { type: () => String }) category: string) {
+    return this.placeService.findByCategory(category);
+  }
+  @Public()
+  @Query(() => [Place])
+  findByName(@Args('name', { type: () => String }) name: string) {
+    return this.placeService.findByName(name);
+  }
   @Mutation(() => Place)
   updatePlace(@Args('updatePlaceInput') updatePlaceInput: UpdatePlaceInput) {
     return this.placeService.update(updatePlaceInput.id, updatePlaceInput);

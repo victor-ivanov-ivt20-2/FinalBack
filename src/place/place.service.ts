@@ -34,12 +34,6 @@ export class PlaceService {
         lati = response.data[0].geo_lat;
       })
       .catch((error) => console.log('error', error));
-    // const address = await this.prisma.address.create({
-    //   data: {
-    //     longitude: createPlaceInput.longitude,
-    //     latitude: createPlaceInput.latitude,
-    //   },
-    // });
     return this.prisma.place.create({
       data: {
         name: createPlaceInput.name,
@@ -51,10 +45,25 @@ export class PlaceService {
         street: createPlaceInput.street,
         house: createPlaceInput.house,
         price: createPlaceInput.price,
+        categories: {
+          create: {
+            name: 'Семейный отдых',
+          },
+        },
       },
     });
   }
-
+  async findByCategory(category: string) {
+    return this.prisma.place.findMany({
+      where: {
+        categories: {
+          some: {
+            name: category,
+          },
+        },
+      },
+    });
+  }
   async findAll(findmany: FindMany) {
     return this.prisma.place.findMany({
       skip: findmany.skip,
@@ -73,6 +82,15 @@ export class PlaceService {
     return this.prisma.place.findUnique({
       where: {
         id: id,
+      },
+    });
+  }
+  async findByName(name: string) {
+    return this.prisma.place.findMany({
+      where: {
+        name: {
+          contains: name,
+        },
       },
     });
   }

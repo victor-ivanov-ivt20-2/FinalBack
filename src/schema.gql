@@ -87,6 +87,8 @@ type Place {
 
 type Query {
   findAll(findmany: FindMany!): [Place!]!
+  findByCategory(category: String!): [Place!]!
+  findByName(name: String!): [Place!]!
   findThree: [Place!]!
   hello: String!
   place(id: Int!): Place!
